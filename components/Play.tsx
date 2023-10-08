@@ -11,7 +11,7 @@ export const Play = ()=>{
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#192A56',
+      backgroundColor: '#0F0F0F',
       alignItems: 'center',
       justifyContent: 'center',
     },
