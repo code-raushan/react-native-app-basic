@@ -8,6 +8,10 @@ import { Home } from './Screen/Home';
 import { Search } from './Screen/Search';
 import { Play } from './Screen/Play';
 import { User } from './Screen/User';
+import LiveCourse from './Screen/LiveCourse';
+import AffordableCourse from './Screen/AffordableCourse';
+import CommunityCourse from './Screen/CommunityCourse';
+import TestSeries from './Screen/TestSeries';
 
 
 export default function Navigation() {
@@ -16,9 +20,49 @@ export default function Navigation() {
 
     function StackGroup() {
         return (
-            <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name='HomeGroup' component={TabGroup} />
-                <Stack.Screen name='Course' component={CourseScreen} />
+                <Stack.Screen 
+                    name='LiveCourse' 
+                    component={LiveCourse}
+                    options={{
+                        presentation: "modal",
+                        headerTitle: "Live Course",
+                        headerShown: true,
+                    }}
+                />
+                <Stack.Screen 
+                    name='AffordableCourse' 
+                    component={AffordableCourse} 
+                    options={{
+                        presentation: "modal",
+                        headerTitle: "Affordable Course",
+                        headerShown: true,
+                    
+                    }}
+                />
+                <Stack.Screen 
+                    name='CommunityCourse' 
+                    component={CommunityCourse} 
+                    options={{
+                        presentation: "modal",
+                        headerTitle: "Community Course",
+                        headerShown: true,
+                    }}
+                />
+                <Stack.Screen 
+                    name='TestSeries' 
+                    component={TestSeries} 
+                    options={{
+                        presentation: "modal",
+                        headerTitle: "Test Series",
+                        headerShown: true,
+                    }}
+                />
+                <Stack.Screen 
+                    name='Course' 
+                    component={CourseScreen} 
+                />
             </Stack.Navigator>
         )
     }
@@ -27,35 +71,29 @@ export default function Navigation() {
 
     function TabGroup() {
         return (
-                <Tab.Navigator
+            <Tab.Navigator
                 detachInactiveScreens
-                    screenOptions={{
-                        tabBarInactiveTintColor: '#fff',
-                        tabBarActiveTintColor: '#ff0000',
-                        headerShown: false,
-                        tabBarStyle: {
-                            backgroundColor: "#111",
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                        },
-                        tabBarShowLabel: false,
-                        tabBarItemStyle: {
-                            marginTop: 3,
-                            marginBottom: 3,
-                            marginLeft: 5,
-                            marginRight: 5,
-                            backgroundColor: "#110111",
-                            borderRadius: 10
-                        },
+                screenOptions={{
+                    tabBarInactiveTintColor: '#fff',
+                    tabBarActiveTintColor: '#ff0000',
+                    headerShown: false,
+                    tabBarStyle: {
+                        backgroundColor: "#111",
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                    },
+                    tabBarShowLabel: false,
+                    tabBarItemStyle: {
 
-                    }}
+                    },
+                }}
 
-                >
-                    <Tab.Screen name="Home" options={{ tabBarIcon: ({ color, size }) => { return <Icon name='home' size={20} color={color} /> } }} component={Home} />
-                    <Tab.Screen name="Search" options={{ tabBarIcon: ({ color, size }) => { return <Icon name='search' size={20} color={color} selectionColor={"#ff0000"} /> } }} component={Search} />
-                    <Tab.Screen name="Play" options={{ tabBarIcon: ({ color, size }) => { return <Icon name='play' size={20} color={color} /> } }} component={Play} />
-                    <Tab.Screen name="User" options={{ tabBarIcon: ({ color, size }) => { return <Icon name='user' size={20} color={color} /> } }} component={User} />
-                </Tab.Navigator>
+            >
+                <Tab.Screen name="Home" options={{ tabBarIcon: ({ color, size, focused }) => { return <Icon name='home' size={20} color={color} /> } }} component={Home} />
+                <Tab.Screen name="Search" options={{ tabBarIcon: ({ color, size }) => { return <Icon name='search' size={20} color={color}/> } }} component={Search} />
+                <Tab.Screen name="Play" options={{ tabBarIcon: ({ color, size }) => { return <Icon name='play' size={20} color={color} /> } }} component={Play} />
+                <Tab.Screen name="User" options={{ tabBarIcon: ({ color, size }) => { return <Icon name='user' size={20} color={color} /> } }} component={User} />
+            </Tab.Navigator>
         )
     }
     return (

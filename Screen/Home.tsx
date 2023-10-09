@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, Image, ScrollView, FlatList } from "react-native"
-import { useState, useEffect, useLayoutEffect } from "react"
-import axios from "axios"
-import CourseItem from "../components/CourseItem"
+import { View, Text, StyleSheet, Image, ScrollView, FlatList, ActivityIndicator } from "react-native"
+import { useState, useLayoutEffect } from "react"
+import axios from "axios";
+import CourseItem from "../components/CourseItem";
 
-export const Home = () => {
+export const Home = ({navigation}) => {
+    // const navigation = useNavigation();
     const [courseData, setCourseData] = useState<Course[]>([]);
     const [banner, setBanner] = useState<Banner[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +20,7 @@ export const Home = () => {
             setIsLoading(false);
         }
     };
-    const fetchTopBanners = async ()=>{
+    const fetchTopBanners = async () => {
         try {
             const response = await axios.get('https://api.ineuron.ai/v1/banners?type=MOBILE');
             setBanner(response.data.data);
@@ -36,63 +37,69 @@ export const Home = () => {
 
     if (isLoading) {
         return (
-            <Text>Loading...</Text>
+            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+                <ActivityIndicator size={"large"} />
+            </View>
         )
     }
+    const liveCourses = courseData.filter((course: Course) => course.tags?.includes('live'));
+    const affordableCourses = courseData.filter((course: Course) => course.tags?.includes('affordable'));
+    const testSeries = courseData.filter((course: Course) => course.tags?.includes('test-series'));
+    const communityCourses = courseData.filter((course: Course) => course.tags?.includes('community'))
     return (
         <ScrollView style={styles.container}>
-            <FlatList 
+            <FlatList
                 data={banner}
-                renderItem={({item})=> <Image source={{uri: `https://cdn.ineuron.ai/assets/uploads/banners/${item.imgUrl}`}} style={{width: 300, height: 200, resizeMode: "contain"}}/>}
+                renderItem={({ item }) => <Image source={{ uri: `https://cdn.ineuron.ai/assets/uploads/banners/${item.imgUrl}` }} style={{ width: 300, height: 200, resizeMode: "contain" }} />}
                 horizontal={true}
                 showsHorizontalScrollIndicator={true}
-                ItemSeparatorComponent={()=><View style={{width: 20}}/>}
+                ItemSeparatorComponent={() => <View style={{ width: 20 }} />}
             />
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <Text style={{ color: '#fff', marginTop: 20, marginBottom: 10, fontSize: 20 }}>Live Programs</Text>
-                <Text style={{ color: '#ff0000', marginTop: 20, marginBottom: 10 }}>See More</Text>
+                <Text style={{ color: '#ff0000', marginTop: 20, marginBottom: 10 }} onPress={() => navigation.navigate('LiveCourse', {liveCourses})}>See More</Text>
             </View>
 
             <FlatList
-                data={courseData.filter((course: Course) => course.tags?.includes('live'))}
-                renderItem={({ item }) => <CourseItem item={item}/>}
+                data={liveCourses}
+                renderItem={({ item }) => <CourseItem item={item} />}
                 keyExtractor={item => item._id}
                 horizontal={true}
             />
 
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                <Text style={{ color: '#fff', marginTop: 20, marginBottom: 10, fontSize: 20  }}>Affordable Programs</Text>
-                <Text style={{ color: '#ff0000', marginTop: 20, marginBottom: 10 }}>See More</Text>
+                <Text style={{ color: '#fff', marginTop: 20, marginBottom: 10, fontSize: 20 }}>Affordable Programs</Text>
+                <Text style={{ color: '#ff0000', marginTop: 20, marginBottom: 10 }} onPress={() => navigation.navigate('AffordableCourse', {affordableCourses})}>See More</Text>
             </View>
 
             <FlatList
-                data={courseData.filter((course: Course) => course.tags?.includes('affordable'))}
-                renderItem={({ item }) => <CourseItem item={item}/>}
+                data={affordableCourses}
+                renderItem={({ item }) => <CourseItem item={item} />}
                 keyExtractor={item => item._id}
                 horizontal={true}
             />
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                <Text style={{ color: '#fff', marginTop: 20, marginBottom: 10, fontSize: 20  }}>Test Series</Text>
-                <Text style={{ color: '#ff0000', marginTop: 20, marginBottom: 10 }}>See More</Text>
+                <Text style={{ color: '#fff', marginTop: 20, marginBottom: 10, fontSize: 20 }}>Test Series</Text>
+                <Text style={{ color: '#ff0000', marginTop: 20, marginBottom: 10 }} onPress={() => navigation.navigate('TestSeries', {testSeries})}>See More</Text>
             </View>
 
             <FlatList
-                data={courseData.filter((course: Course) => course.tags?.includes('test-series'))}
-                renderItem={({ item }) =><CourseItem item={item}/>}
+                data={testSeries}
+                renderItem={({ item }) => <CourseItem item={item} />}
                 keyExtractor={item => item._id}
                 horizontal={true}
             />
-             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                <Text style={{ color: '#fff', marginTop: 20, marginBottom: 10, fontSize: 20  }}>Community Programs</Text>
-                <Text style={{ color: '#ff0000', marginTop: 20, marginBottom: 10 }}>See More</Text>
+            <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                <Text style={{ color: '#fff', marginTop: 20, marginBottom: 10, fontSize: 20 }}>Community Programs</Text>
+                <Text style={{ color: '#ff0000', marginTop: 20, marginBottom: 10 }} onPress={() => navigation.navigate('CommunityCourse', {communityCourses})}>See More</Text>
             </View>
 
             <FlatList
-                data={courseData.filter((course: Course) => course.tags?.includes('community'))}
-                renderItem={({ item }) => <CourseItem item={item}/>}
+                data={communityCourses}
+                renderItem={({ item }) => <CourseItem item={item} />}
                 keyExtractor={item => item._id}
                 horizontal={true}
-                style={{marginBottom:30}}
+                style={{ marginBottom: 30 }}
             />
         </ScrollView>
     )
@@ -103,6 +110,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#232D3F',
         padding: 20,
         alignContent: "center"
-        
+
     },
 });
