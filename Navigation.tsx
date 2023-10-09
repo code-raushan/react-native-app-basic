@@ -29,6 +29,11 @@ export default function Navigation() {
                         presentation: "modal",
                         headerTitle: "Live Course",
                         headerShown: true,
+                        headerStyle: {
+                            backgroundColor: '#232D3F',
+                            
+                        },
+                        headerTintColor: '#fff',
                     }}
                 />
                 <Stack.Screen 
@@ -38,6 +43,11 @@ export default function Navigation() {
                         presentation: "modal",
                         headerTitle: "Affordable Course",
                         headerShown: true,
+                        headerStyle: {
+                            backgroundColor: '#232D3F',
+                            
+                        },
+                        headerTintColor: '#fff',
                     
                     }}
                 />
@@ -48,6 +58,11 @@ export default function Navigation() {
                         presentation: "modal",
                         headerTitle: "Community Course",
                         headerShown: true,
+                        headerStyle: {
+                            backgroundColor: '#232D3F',
+                            
+                        },
+                        headerTintColor: '#fff',
                     }}
                 />
                 <Stack.Screen 
@@ -57,6 +72,12 @@ export default function Navigation() {
                         presentation: "modal",
                         headerTitle: "Test Series",
                         headerShown: true,
+                        headerStyle: {
+                            backgroundColor: '#232D3F',
+                            
+                        },
+                        headerTintColor: '#fff',
+
                     }}
                 />
                 <Stack.Screen 
@@ -83,16 +104,29 @@ export default function Navigation() {
                         alignItems: 'center',
                     },
                     tabBarShowLabel: false,
-                    tabBarItemStyle: {
-
-                    },
                 }}
 
             >
-                <Tab.Screen name="Home" options={{ tabBarIcon: ({ color, size, focused }) => { return <Icon name='home' size={20} color={color} /> } }} component={Home} />
-                <Tab.Screen name="Search" options={{ tabBarIcon: ({ color, size }) => { return <Icon name='search' size={20} color={color}/> } }} component={Search} />
-                <Tab.Screen name="Play" options={{ tabBarIcon: ({ color, size }) => { return <Icon name='play' size={20} color={color} /> } }} component={Play} />
-                <Tab.Screen name="User" options={{ tabBarIcon: ({ color, size }) => { return <Icon name='user' size={20} color={color} /> } }} component={User} />
+                <Tab.Screen 
+                    name="Home" 
+                    options={{ tabBarIcon: ({ color, size, focused }) =><Icon name='home' size={20} color={color} style={{backgroundColor: focused && "#232D3F", padding: 4, borderRadius: 100}} /> } }
+                    component={Home} 
+                />
+                <Tab.Screen 
+                    name="Search" 
+                    options={{ tabBarIcon: ({ color, focused }) => <Icon name='search' size={20} color={color} style={{backgroundColor: focused && "#232D3F", padding: 4, borderRadius: 100}} /> } }
+                    component={Search} 
+                />
+                <Tab.Screen 
+                    name="Play" 
+                    options={{ tabBarIcon: ({ color, focused }) =><Icon name='play-circle' size={20} color={color} style={{backgroundColor: focused && "#232D3F", padding: 6, borderRadius: 100}} /> } }
+                    component={Play} 
+                />
+                <Tab.Screen 
+                    name="User" 
+                    options={{ tabBarIcon: ({ color, focused }) =><Icon name='user-circle' size={20} color={color} style={{backgroundColor: focused && "#232D3F", padding: 4, borderRadius: 100}} /> } }
+                    component={User} 
+                />
             </Tab.Navigator>
         )
     }
