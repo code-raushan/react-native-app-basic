@@ -4,10 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
 import CourseScreen from './Screen/CourseScreen';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { Home } from './components/Home';
-import { Search } from './components/Search';
-import { Play } from './components/Play';
-import { User } from './components/User';
+import { Home } from './Screen/Home';
+import { Search } from './Screen/Search';
+import { Play } from './Screen/Play';
+import { User } from './Screen/User';
 
 
 export default function Navigation() {

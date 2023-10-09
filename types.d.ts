@@ -1,4 +1,4 @@
-interface Course {
+type Course =  {
     _id: string;
     platformType: string;
     title: string;
@@ -47,3 +47,10 @@ interface Course {
     };
 }
 
+interface Banner {
+    _id: string;
+    text: string;
+    link: string;
+    bannerType: string;
+    imgUrl: string;
+  }
