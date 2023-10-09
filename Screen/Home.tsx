@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ScrollView, FlatList, ActivityIndicator } from "react-native"
+import { View, Text, StyleSheet, Image, ScrollView, FlatList, ActivityIndicator, Pressable } from "react-native"
 import { useState, useLayoutEffect } from "react"
 import axios from "axios";
 import CourseItem from "../components/CourseItem";
@@ -32,7 +32,6 @@ export const Home = ({navigation}) => {
     useLayoutEffect(() => {
         fetchTopBanners();
         fetchCourseData();
-
     }, []);
 
     if (isLoading) {
@@ -45,7 +44,7 @@ export const Home = ({navigation}) => {
     const liveCourses = courseData.filter((course: Course) => course.tags?.includes('live'));
     const affordableCourses = courseData.filter((course: Course) => course.tags?.includes('affordable'));
     const testSeries = courseData.filter((course: Course) => course.tags?.includes('test-series'));
-    const communityCourses = courseData.filter((course: Course) => course.tags?.includes('community'))
+    const communityCourses = courseData.filter((course: Course) => course.tags?.includes('community'));
     return (
         <ScrollView style={styles.container}>
             <FlatList
@@ -74,7 +73,7 @@ export const Home = ({navigation}) => {
 
             <FlatList
                 data={affordableCourses}
-                renderItem={({ item }) => <CourseItem item={item} />}
+                renderItem={({ item }) => <Pressable onPress={()=>navigation.navigate("Course", {item})}><CourseItem item={item} /></Pressable>}
                 keyExtractor={item => item._id}
                 horizontal={true}
             />

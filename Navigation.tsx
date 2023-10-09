@@ -83,6 +83,17 @@ export default function Navigation() {
                 <Stack.Screen 
                     name='Course' 
                     component={CourseScreen} 
+                    options={{
+                        presentation: "modal",
+                        headerTitle: "Test Series",
+                        headerShown: true,
+                        headerStyle: {
+                            backgroundColor: '#232D3F',
+                            
+                        },
+                        headerTintColor: '#fff',
+
+                    }}
                 />
             </Stack.Navigator>
         )
