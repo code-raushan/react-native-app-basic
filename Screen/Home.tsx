@@ -53,6 +53,7 @@ export const Home = ({navigation}) => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={true}
                 ItemSeparatorComponent={() => <View style={{ width: 20 }} />}
+                style={{paddingTop: 20}}
             />
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <Text style={{ color: '#fff', marginTop: 20, marginBottom: 10, fontSize: 20 }}>Live Programs</Text>
@@ -61,7 +62,7 @@ export const Home = ({navigation}) => {
 
             <FlatList
                 data={liveCourses}
-                renderItem={({ item }) => <CourseItem item={item} />}
+                renderItem={({ item }) => <Pressable onPress={()=>navigation.navigate("Course", {item})}><CourseItem item={item} /></Pressable>}
                 keyExtractor={item => item._id}
                 horizontal={true}
             />
@@ -84,7 +85,7 @@ export const Home = ({navigation}) => {
 
             <FlatList
                 data={testSeries}
-                renderItem={({ item }) => <CourseItem item={item} />}
+                renderItem={({ item }) => <Pressable onPress={()=>navigation.navigate("Course", {item})}><CourseItem item={item} /></Pressable>}
                 keyExtractor={item => item._id}
                 horizontal={true}
             />
@@ -95,7 +96,7 @@ export const Home = ({navigation}) => {
 
             <FlatList
                 data={communityCourses}
-                renderItem={({ item }) => <CourseItem item={item} />}
+                renderItem={({ item }) => <Pressable onPress={()=>navigation.navigate("Course", {item})}><CourseItem item={item} /></Pressable>}
                 keyExtractor={item => item._id}
                 horizontal={true}
                 style={{ marginBottom: 30 }}
@@ -107,8 +108,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#232D3F',
-        padding: 20,
-        alignContent: "center"
-
+        alignContent: "center",
+        paddingLeft: 20,
+        paddingRight:20
     },
 });

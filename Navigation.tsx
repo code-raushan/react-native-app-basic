@@ -1,3 +1,4 @@
+import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -85,15 +86,8 @@ export default function Navigation() {
                     component={CourseScreen} 
                     options={{
                         presentation: "modal",
-                        headerTitle: "Test Series",
-                        headerShown: true,
-                        headerStyle: {
-                            backgroundColor: '#232D3F',
-                            
-                        },
-                        headerTintColor: '#fff',
-
                     }}
+                    
                 />
             </Stack.Navigator>
         )
