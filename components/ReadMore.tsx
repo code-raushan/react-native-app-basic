@@ -11,7 +11,7 @@ export default function ReadMore({ text, maxLength }: { text: string, maxLength:
     return (
         <View>
             <Text style={{ color: "#fff", fontWeight: "400"}}>{displayText}{text.length > maxLength && (
-                <Text onPress={toggle} style={{color: "#ff0000"}}>{isExpanded ? "Read Less" : "...Read More"}</Text>
+                <Text onPress={toggle} style={{color: isExpanded?"#362FD9": "#ff0000"}}>{isExpanded ? "Read Less" : "...Read More"}</Text>
             )}
             </Text>
 

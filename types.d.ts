@@ -1,4 +1,4 @@
-type Course =  {
+interface Course {
     _id: string;
     platformType: string;
     title: string;
@@ -35,6 +35,7 @@ type Course =  {
             link: string;
         };
     }[];
+    classTimings?: ClassTimings;
     courseInOneNeuron: {
         bundleName: string;
         bundleId: string;
@@ -54,3 +55,9 @@ interface Banner {
     bannerType: string;
     imgUrl: string;
   }
+
+interface ClassTimings{
+    startDate: string;
+    doubtClearing: string;
+    timings: string;
+}
